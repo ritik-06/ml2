@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Exam Performance Indicator</title>
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    
+    
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>✨ Student Exam Performance Indicator ✨</h1>
+            <p class="subtitle">Enter your information below to predict your math score based on various factors</p>
+        </div>
+        
+        <div class="form-container">
+            <form action="{{ url_for('predict_datapoint')}}" method="post">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" class="form-control" name="gender" required>
+                        <option selected disabled value="">Select your Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="ethnicity">Race or Ethnicity</label>
+                    <select id="ethnicity" class="form-control" name="ethnicity" required>
+                        <option selected disabled value="">Select Ethnicity</option>
+                        <option value="group A">Group A</option>
+                        <option value="group B">Group B</option>
+                        <option value="group C">Group C</option>
+                        <option value="group D">Group D</option>
+                        <option value="group E">Group E</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="education">Parental Level of Education</label>
+                    <select id="education" class="form-control" name="parental_level_of_education" required>
+                        <option selected disabled value="">Select Parent Education</option>
+                        <option value="associate's degree">Associate's degree</option>
+                        <option value="bachelor's degree">Bachelor's degree</option>
+                        <option value="high school">High school</option>
+                        <option value="master's degree">Master's degree</option>
+                        <option value="some college">Some college</option>
+                        <option value="some high school">Some high school</option>
+                    </select>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="lunch">Lunch Type</label>
+                        <select id="lunch" class="form-control" name="lunch" required>
+                            <option selected disabled value="">Select Lunch Type</option>
+                            <option value="free/reduced">Free/Reduced</option>
+                            <option value="standard">Standard</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group half">
+                        <label for="test_course">Test Preparation Course</label>
+                        <select id="test_course" class="form-control" name="test_preparation_course" required>
+                            <option selected disabled value="">Select Test Course</option>
+                            <option value="none">None</option>
+                            <option value="completed">Completed</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group half">
+                        <label for="reading_score">Reading Score (0-100)</label>
+                        <input id="reading_score" class="form-control" type="number" name="reading_score" 
+                            placeholder="Enter Reading score" min="0" max="100" required />
+                    </div>
+                    
+                    <div class="form-group half">
+                        <label for="writing_score">Writing Score (0-100)</label>
+                        <input id="writing_score" class="form-control" type="number" name="writing_score" 
+                            placeholder="Enter Writing score" min="0" max="100" required />
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="submit-btn">Predict Math Score</button>
+                </div>
+            </form>
+            
+            <div class="result-container" id="result-section">
+                <h2>Your Prediction Result</h2>
+                <div class="result-box">
+                    <p>Based on your inputs, your predicted math score is:</p>
+                    <span class="prediction">{{results}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 Student Performance Indicator | All Rights Reserved</p>
+    </footer>
+</body>
+</html>
