@@ -1,4 +1,4 @@
-import sys
+import sys,os
 import pandas as pd
 from src.exception import CustomeException
 from src.utils import Load_object
@@ -8,10 +8,13 @@ class PredictPipeline:
         pass
     def predict(self,features):
         try:
-            model = Load_object(file_path='artifacts\model.pkl')
-            preprocessor = Load_object(file_path='artifacts\preprocessor.pkl')
-            data_scaled = preprocessor.transform(features)
-            preds = model.predict(data_scaled)
+            model_path=os.path.join("artifacts","model.pkl")
+            preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
+            model=Load_object(file_path=model_path)
+            preprocessor=Load_object(file_path=preprocessor_path)
+            print("After Loading")
+            data_scaled=preprocessor.transform(features)
+            preds=model.predict(data_scaled)
             return preds
         except Exception as e:
             raise CustomeException(e,sys)
